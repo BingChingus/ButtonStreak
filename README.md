@@ -1,2 +1,2 @@
 # ButtonStreak
-every "button press" increases chance of failure by 1%, run indefinitely and record highest streak
+every iteration increases the chance of failure by 1% starting at 0%; prone to integer overflow
