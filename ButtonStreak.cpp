@@ -15,14 +15,9 @@ struct space_out : std::numpunct<char>
 int main()
 {
     std::mt19937 mt{ std::random_device{}() };
-    std::uniform_int_distribution rNum{1, 100};
+    std::uniform_int_distribution rNum{1, 100}; 
 
-    std::cout.imbue(std::locale(std::cout.getloc(), new space_out));
-
-    for (int i = 0; i < 20; ++i)
-    {
-        std::cout << rNum(mt) << " ";
-    }
+    std::cout.imbue(std::locale(std::cout.getloc(), new space_out)); //idk what this does also copied from the site-who-will-not-be-named
 
     int chance {0};
     int streak{0};
@@ -33,8 +28,9 @@ int main()
     while(true)
     {
         int error {rNum(mt)};
+        ++chance;
 
-        if (error > chance)
+        if (error > chance) //increase the streak if random num clears the failure rate, reset streak + failure rate otherwise
             ++streak;
         else 
         {
@@ -42,13 +38,12 @@ int main()
             streak = 0;
         }
 
-        if (streak > maxStreak)
+        if (streak > maxStreak) //check if theres a new max streak, if so, print the new streak + how many runs it took
         {
             maxStreak = streak;
             std::cout << "Max streak: " << maxStreak << " after " << runs << " runs" << '\n';
         }
         
-        ++chance;
         ++runs;
     }
 }
