@@ -2,6 +2,7 @@
 #include <random>
 #include <chrono>
 #include <locale>
+#include <limits.h>
 
 // 3/20/24 - max streak acheived: 55 after 1,706,758,892 runs
 
@@ -24,9 +25,15 @@ int main()
     int maxStreak {0};
     int runs {0};
 
-    int i {0};
+    //int i {0};
     while(true)
     {
+        if (runs == INT_MAX) //break if runs reached the int limit
+        {
+            std::cout << "max runs reached";
+            break;
+        }
+
         int error {rNum(mt)};
         ++chance;
 
